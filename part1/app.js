@@ -2,7 +2,8 @@ var express     = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
     mongoose    = require("mongoose"),
-    dreams      = require("./models/dreams"),
+    dreams  = require("./models/dreams"),
+    Comment     = require("./models/comment"),
     seedDB      = require("./seeds")
     
 mongoose.connect("mongodb://localhost/oneiro");
@@ -21,7 +22,7 @@ app.get("/dreams", function(req, res){
        if(err){
            console.log(err);
        } else {
-          res.render("index",{dreams:alldreams});
+          res.render("dreams/index",{dreams:alldreams});
        }
     });
 });
@@ -46,22 +47,58 @@ app.post("/dreams", function(req, res){
 
 //NEW - show form to create new dreams
 app.get("/dreams/new", function(req, res){
-   res.render("new.ejs"); 
+   res.render("dreams/new"); 
 });
 
-// SHOW - shows more info about one dream
+// SHOW - shows more info about one dreams
 app.get("/dreams/:id", function(req, res){
-    //find the dream with provided ID
+    //find the dreams with provided ID
     dreams.findById(req.params.id).populate("comments").exec(function(err, founddreams){
         if(err){
             console.log(err);
         } else {
             console.log(founddreams)
             //render show template with that dreams
-            res.render("show", {dreams: dreams});
+            res.render("dreams/show", {dreams: founddreams});
         }
     });
-})
+});
+
+
+// ====================
+// COMMENTS ROUTES
+// ====================
+
+app.get("/dreams/:id/comments/new", function(req, res){
+    // find dreams by id
+    dreams.findById(req.params.id, function(err, dreams){
+        if(err){
+            console.log(err);
+        } else {
+             res.render("comments/new", {dreams: dreams});
+        }
+    })
+});
+
+app.post("/dreams/:id/comments", function(req, res){
+   //lookup dreams using ID
+   dreams.findById(req.params.id, function(err, dreams){
+       if(err){
+           console.log(err);
+           res.redirect("/dreams");
+       } else {
+        Comment.create(req.body.comment, function(err, comment){
+           if(err){
+               console.log(err);
+           } else {
+               dreams.comments.push(comment);
+               dreams.save();
+               res.redirect('/dreams/' + dreams._id);
+           }
+        });
+       }
+   });
+});
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("The Oneiro Server Has Started!");
