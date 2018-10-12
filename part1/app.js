@@ -4,12 +4,13 @@ var express     = require("express"),
     mongoose    = require("mongoose"),
     passport    = require("passport"),
     LocalStrategy = require("passport-local"),
+    methodOverride = require("method-override"),
     dreams  = require("./models/dreams"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
     seedDB      = require("./seeds")
     
-//requring routes
+//requiring routes
 var commentRoutes    = require("./routes/comments"),
     dreamsRoutes = require("./routes/dreams"),
     indexRoutes      = require("./routes/index")
@@ -18,11 +19,12 @@ mongoose.connect("mongodb://localhost/oneiro");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-seedDB();
+app.use(methodOverride("_method"));
+// seedDB(); //seed the database
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
-    secret: "Nothing to say",
+    secret: "Nothing to say!",
     resave: false,
     saveUninitialized: false
 }));
@@ -40,6 +42,7 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/dreams", dreamsRoutes);
 app.use("/dreams/:id/comments", commentRoutes);
+
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("The Oneiro Server Has Started!");

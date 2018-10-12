@@ -1,6 +1,8 @@
 var express = require("express");
 var router  = express.Router();
 var dreams = require("../models/dreams");
+var middleware = require("../middleware");
+
 
 //INDEX - show all dreams
 router.get("/", function(req, res){
@@ -15,7 +17,7 @@ router.get("/", function(req, res){
 });
 
 //CREATE - add new dream to DB
-router.post("/", isLoggedIn, function(req, res){
+router.post("/", middleware.isLoggedIn, function(req, res){
     // get data from form and add to dreams array
     var name = req.body.name;
     var image = req.body.image;
@@ -38,7 +40,7 @@ router.post("/", isLoggedIn, function(req, res){
 });
 
 //NEW - show form to create new dream
-router.get("/new", isLoggedIn, function(req, res){
+router.get("/new", middleware.isLoggedIn, function(req, res){
    res.render("dreams/new"); 
 });
 
@@ -56,14 +58,37 @@ router.get("/:id", function(req, res){
     });
 });
 
+// EDIT Dream ROUTE
+router.get("/:id/edit", middleware.checkDreamOwnership, function(req, res){
+    dreams.findById(req.params.id, function(err, founddreams){
+        res.render("dreams/edit", {dreams: founddreams});
+    });
+});
 
-//middleware
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-}
+// UPDATE Dream ROUTE
+router.put("/:id",middleware.checkDreamOwnership, function(req, res){
+    // find and update the correct dreams
+    dreams.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updateddreams){
+       if(err){
+           res.redirect("/dreams");
+       } else {
+           //redirect somewhere(show page)
+           res.redirect("/dreams/" + req.params.id);
+       }
+    });
+});
+
+// DESTROY Dream ROUTE
+router.delete("/:id",middleware.checkDreamOwnership, function(req, res){
+   dreams.findByIdAndRemove(req.params.id, function(err){
+      if(err){
+          res.redirect("/dreams");
+      } else {
+          res.redirect("/dreams");
+      }
+   });
+});
+
 
 module.exports = router;
 
