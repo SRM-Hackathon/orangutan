@@ -1,12 +1,12 @@
 {
   "name": "v1",
   "version": "1.0.0",
-  "description": "YelpCamp v1",
+  "description": 
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Colt Steele",
+  "author": "Orangutan"
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.14.1",

@@ -1,24 +1,15 @@
 var express     = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose")
-
+    mongoose    = require("mongoose"),
+    dreams      = require("./models/dreams"),
+    seedDB      = require("./seeds")
+    
 mongoose.connect("mongodb://localhost/oneiro");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+seedDB();
 
-// SCHEMA SETUP
-var dreamsSchema = new mongoose.Schema({
-   name: String,
-   image: String,
-   description: String
-});
-
-var dreams = mongoose.model("dreams", dreamsSchema);
-
-
-
-    
 app.get("/", function(req, res){
     res.render("landing");
 });
@@ -61,12 +52,13 @@ app.get("/dreams/new", function(req, res){
 // SHOW - shows more info about one dream
 app.get("/dreams/:id", function(req, res){
     //find the dream with provided ID
-    dreams.findById(req.params.id, function(err, founddreams){
+    dreams.findById(req.params.id).populate("comments").exec(function(err, founddreams){
         if(err){
             console.log(err);
         } else {
-            //render show template with that dream
-            res.render("show", {dreams: founddreams});
+            console.log(founddreams)
+            //render show template with that dreams
+            res.render("show", {dreams: dreams});
         }
     });
 })
