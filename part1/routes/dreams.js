@@ -30,7 +30,7 @@ router.get("/", function(req, res){
     if(req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         // Get all dreams from DB
-        dreams.find({pincode: regex}, function(err, alldreams){
+        dreams.find({Pincode: regex}, function(err, alldreams){
            if(err){
                console.log(err);
            } else {
@@ -84,6 +84,13 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
    res.render("dreams/new"); 
 });
 
+//for solve
+router.get("/solve", middleware.isLoggedIn, function(req, res){
+   res.render("dreams/solve"); 
+});
+
+
+
 // SHOW - shows more info about one dream
 router.get("/:id", function(req, res){
     //find the dream with provided ID
@@ -125,6 +132,7 @@ router.put("/:id", upload.single('image'), function(req, res){
             }
             dreams.name = req.body.name;
             dreams.description = req.body.description;
+            dreams.Pincode = req.body.Pincode;
             dreams.save();
             req.flash("success","Successfully Updated!");
             res.redirect("/dreams/" + dreams._id);

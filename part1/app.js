@@ -18,7 +18,7 @@ var express     = require("express"),
     indexRoutes      = require("./routes/index")
     
     
-mongoose.connect("mongodb://localhost/oneiro");
+mongoose.connect("mongodb://localhost/onerio");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -28,7 +28,7 @@ app.use(flash());
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
-    secret: "nothing to say",
+    secret: "Once again Rusty wins cutest dog!",
     resave: false,
     saveUninitialized: false
 }));

@@ -1,0 +1,17 @@
+<% include ../partials/header %>
+
+<div class="row">
+	<div class="col-md-4">
+		<h3>User ID:-<%= user.id %></h3>
+		    <ul>
+		<% dreams.forEach(function(dreams) { %>
+			<li><a href="/dreams/<%= dreams.id %>"><%= dreams.name %><%= dreams.Pincode %></a></li>
+		<% }); %>
+		</ul>
+		<li>Pincode:-<%= dreams.Pincode %></li>
+		</ul>
+	</div>
+</div>
+
+
+<% include ../partials/footer %>

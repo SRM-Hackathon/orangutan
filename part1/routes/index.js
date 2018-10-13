@@ -104,7 +104,7 @@ router.post('/forgot', function(req, res, next) {
       });
       var mailOptions = {
         to: user.email,
-        from: 'learntocodeinfo@gmail.com',
+        from: 'mkarthikkumar19@gmail.com',
         subject: 'Node.js Password Reset',
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
@@ -131,6 +131,12 @@ router.get('/reset/:token', function(req, res) {
     }
     res.render('reset', {token: req.params.token});
   });
+});
+
+//extract
+
+router.get('/extract',function(req, res) {
+    res.render('extract');
 });
 
 router.post('/reset/:token', function(req, res) {
@@ -199,6 +205,22 @@ router.get("/users/:id", function(req, res) {
     })
   });
 });
+router.get("/author/:id",function(req,res){
+  User.findById(req.params.id, function(err, foundUser) {
+    if(err) {
+      req.flash("error", "Something went wrong.");
+      return res.redirect("/");
+    }
+    dreams.find().where('author.id').equals(foundUser._id).exec(function(err, dreams) {
+      if(err) {
+        req.flash("error", "Something went wrong.");
+        return res.redirect("/");
+      }
+      res.render("users/extract", {user: foundUser, dreams: dreams});
+    })
+  });
+});
+
 
 //chat
 
