@@ -7,6 +7,7 @@ var dreamsSchema = new mongoose.Schema({
    dreamlink: String,
    description: String,
     createdAt: { type: Date, default: Date.now },
+    Pincode : String,
    author: {
       id: {
          type: mongoose.Schema.Types.ObjectId,

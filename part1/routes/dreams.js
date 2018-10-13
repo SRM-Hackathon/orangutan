@@ -30,7 +30,7 @@ router.get("/", function(req, res){
     if(req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         // Get all dreams from DB
-        dreams.find({name: regex}, function(err, alldreams){
+        dreams.find({pincode: regex}, function(err, alldreams){
            if(err){
                console.log(err);
            } else {

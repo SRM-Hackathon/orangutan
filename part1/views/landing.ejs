@@ -6,6 +6,7 @@
 <p>The Dream Generator</p>
 
 <a href="/dreams/">View All Dreams</a>
+<% if(currentUser && currentUser.isAdmin) { %> 
  <p>
            <form action="/dreams" method="GET" class="form-inline">
                <div class="form-group">
@@ -14,7 +15,7 @@
                </div>
            </form>
        </p>
-
+<% } %>
 	</div>
 
 
