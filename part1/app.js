@@ -6,15 +6,17 @@ var express     = require("express"),
     passport    = require("passport"),
     LocalStrategy = require("passport-local"),
     methodOverride = require("method-override"),
-    dreams      = require("./models/dreams"),
+    dreams  = require("./models/dreams"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
-    seedDB      = require("./seeds")
+    seedDB      = require("./seeds"),
+
     
 //requiring routes
-var commentRoutes    = require("./routes/comments"),
+ commentRoutes    = require("./routes/comments"),
     dreamsRoutes = require("./routes/dreams"),
     indexRoutes      = require("./routes/index")
+    
     
 mongoose.connect("mongodb://localhost/oneiro");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -26,7 +28,7 @@ app.use(flash());
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
-    secret: "nothing to say!",
+    secret: "nothing to say",
     resave: false,
     saveUninitialized: false
 }));
@@ -46,6 +48,9 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/dreams", dreamsRoutes);
 app.use("/dreams/:id/comments", commentRoutes);
+
+
+
 
 
 app.listen(process.env.PORT, process.env.IP, function(){

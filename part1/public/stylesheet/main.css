@@ -10,7 +10,10 @@
     padding: 9px;
 }
 
-
 #delete-form {
     display: inline;
+}
+
+.form-group1{
+    margin-top: 10px;
 }

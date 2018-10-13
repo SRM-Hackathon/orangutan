@@ -1,10 +1,46 @@
-<% include ./partials/header %> 
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Oneiro</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="semantic/dist/semantic.min.js"></script>
+        <link rel="stylesheet" href="/stylesheets/main.css">
+    </head>
+    <style>
+        body{
+            background-color: #DADADA;
+        }
+        .container{
+            margin-top:60px;
+        }
 
-<h1>Login!</h1>
-<form action="/login" method="POST">
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-    <input type="submit" value="Login!">
-</form>
 
-<% include ./partials/footer %> 
+    </style>
+     <div class="container">
+        <div class="row">
+            <h1 style="text-align: center">Login</h1>
+            <div style="width: 30%; margin: 25px auto;">
+                <div class="ui-form">
+                <div class="ui stacked segment">
+    <form action="/login" method="POST">
+     <div class="form-group">
+                <input  class="form-control" type="text" name="username" placeholder="username">
+        </div>
+        <div class="form group">
+            <input class="form-control" type="password" name="password" placeholder="password">
+        </div>
+        <div class="form-group1">
+             <input class="form-control" type="submit" value="Login!">
+        </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </html>

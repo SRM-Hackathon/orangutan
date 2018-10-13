@@ -1,9 +1,22 @@
 <% include partials/header %>
 
-<h1>Landing Page!</h1>
 
-<p>Welcome to Oneiro </p>
+		<h1><strong>Oneiro</strong></h1>
 
-<a href="/dreams">View All Dreams</a>
+<p>The Dream Generator</p>
+
+<a href="/dreams/">View All Dreams</a>
+ <p>
+           <form action="/dreams" method="GET" class="form-inline">
+               <div class="form-group">
+                   <input type="text" name="search" placeholder="dreams search..." class="form-control">
+                   <input type="submit" value="Search" class="btn btn-default">
+               </div>
+           </form>
+       </p>
+
+	</div>
+
+
 
 <% include partials/footer %>

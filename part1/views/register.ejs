@@ -1,9 +1,63 @@
 <% include ./partials/header %> 
-<h1>Sign Up!</h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Oneiro</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="semantic/dist/semantic.min.js"></script>
+        <link rel="stylesheet" href="/stylesheets/main.css">
+    </head>
+    <style>
+        body{
+            background-color: #DADADA;
+        }
+        .container{
+            margin-top:30px;
+        }
 
-<form action="/register" method="post">
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-    <button>Sign Up</button>
-</form>
+
+    </style>
+     <div class="container">
+        <div class="row">
+            <h1 style="text-align: center">Sign Up!</h1>
+            <div style="width: 30%; margin: 25px auto;">
+                <div class="ui-form">
+                <div class="ui stacked segment">
+    <form action="/register" method="POST">
+     <div class="form-group">
+                <input  class="form-control" type="text" name="username" placeholder="username">
+        </div>
+        <div class="form group">
+            <input class="form-control" type="password" name="password" placeholder="password">
+        </div>
+         <div class="form-group">
+                <input  class="form-control" style="margin-top:18px" type="text" name="firstname" placeholder="first name">
+        </div>
+         <div class="form-group">
+                <input  class="form-control" type="text" name="lastname" placeholder="last name">
+        </div>
+         <div class="form-group">
+                <input  class="form-control" type="email" name="email" placeholder="Mail Id">
+        </div>
+         <div class="form-group">
+                <input  class="form-control" type="text" name="avatar" placeholder="Avatar URL">
+        </div>
+         <div class="form-group">
+                <input  class="form-control" type="text" name="adminCode" placeholder="Admin Code">
+        </div>
+        <div class="form-group1">
+            <button class="btn btn-s btn-primary">Sign Up</button>
+        </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </html>
 <% include ./partials/footer %> 

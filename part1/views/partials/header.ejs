@@ -3,6 +3,13 @@
     <head>
         <title>Oneiro</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="semantic/dist/semantic.min.js"></script>
+
         <link rel="stylesheet" href="/stylesheets/main.css">
     </head>
     <body>
@@ -17,7 +24,8 @@
                         <li><a href="/login">Login</a></li>
                         <li><a href="/register">Sign Up</a></li>
                     <% } else { %>
-                        <li><a href="#">Signed In As <%= currentUser.username %></a></li>
+                        <li><a href="/users/<%=currentUser.id %>">Signed In As  <%= currentUser.username %></a></li>
+                        <li><a href="https://chatty-karthikkumar19.c9users.io/">Chat</a></li>
                         <li><a href="/logout">Logout</a></li>
                     <% } %>
                 </ul>
@@ -38,4 +46,4 @@
             </div>
         <% } %>
     </div>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>

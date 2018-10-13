@@ -4,15 +4,15 @@ var Comment = require("../models/comment");
 // all the middleare goes here
 var middlewareObj = {};
 
-middlewareObj.checkDreamsOwnership = function(req, res, next) {
+middlewareObj.checkdreamsOwnership = function(req, res, next) {
  if(req.isAuthenticated()){
         dreams.findById(req.params.id, function(err, founddreams){
            if(err){
-               req.flash("error", "Dream not found");
+               req.flash("error", "dream not found");
                res.redirect("back");
            }  else {
-               // does user own the Dream?
-            if(founddreams.author.id.equals(req.user._id)) {
+               // does user own the dreams?
+            if(founddreams.author.id.equals(req.user._id) || req.user.isAdmin) {
                 next();
             } else {
                 req.flash("error", "You don't have permission to do that");
@@ -33,7 +33,7 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
                res.redirect("back");
            }  else {
                // does user own the comment?
-            if(foundComment.author.id.equals(req.user._id)) {
+            if(foundComment.author.id.equals(req.user._id) || req.user.isAdmin) {
                 next();
             } else {
                 req.flash("error", "You don't have permission to do that");
