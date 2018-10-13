@@ -4,21 +4,24 @@ var Comment = require("../models/comment");
 // all the middleare goes here
 var middlewareObj = {};
 
-middlewareObj.checkDreamOwnership = function(req, res, next) {
+middlewareObj.checkDreamsOwnership = function(req, res, next) {
  if(req.isAuthenticated()){
         dreams.findById(req.params.id, function(err, founddreams){
            if(err){
+               req.flash("error", "Dream not found");
                res.redirect("back");
            }  else {
-               // does user own the dreams?
+               // does user own the Dream?
             if(founddreams.author.id.equals(req.user._id)) {
                 next();
             } else {
+                req.flash("error", "You don't have permission to do that");
                 res.redirect("back");
             }
            }
         });
     } else {
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
     }
 }
@@ -33,11 +36,13 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
             if(foundComment.author.id.equals(req.user._id)) {
                 next();
             } else {
+                req.flash("error", "You don't have permission to do that");
                 res.redirect("back");
             }
            }
         });
     } else {
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
     }
 }
@@ -46,6 +51,7 @@ middlewareObj.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
+    req.flash("error", "You need to be logged in to do that");
     res.redirect("/login");
 }
 

@@ -59,16 +59,16 @@ router.get("/:id", function(req, res){
 });
 
 // EDIT Dream ROUTE
-router.get("/:id/edit", middleware.checkDreamOwnership, function(req, res){
+router.get("/:id/edit", middleware.checkDreamsOwnership, function(req, res){
     dreams.findById(req.params.id, function(err, founddreams){
         res.render("dreams/edit", {dreams: founddreams});
     });
 });
 
 // UPDATE Dream ROUTE
-router.put("/:id",middleware.checkDreamOwnership, function(req, res){
-    // find and update the correct dreams
-    dreams.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updateddreams){
+router.put("/:id",middleware.checkDreamsOwnership, function(req, res){
+    // find and update the correct dream
+    dreams.findByIdAndUpdate(req.params.id, req.body.dreams, function(err, updateddreams){
        if(err){
            res.redirect("/dreams");
        } else {
@@ -79,7 +79,7 @@ router.put("/:id",middleware.checkDreamOwnership, function(req, res){
 });
 
 // DESTROY Dream ROUTE
-router.delete("/:id",middleware.checkDreamOwnership, function(req, res){
+router.delete("/:id",middleware.checkDreamsOwnership, function(req, res){
    dreams.findByIdAndRemove(req.params.id, function(err){
       if(err){
           res.redirect("/dreams");

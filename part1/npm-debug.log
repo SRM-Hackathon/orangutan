@@ -2,7 +2,8 @@
 1 verbose cli [ '/home/ubuntu/.nvm/versions/node/v6.11.2/bin/node',
 1 verbose cli   '/home/ubuntu/.nvm/versions/node/v6.11.2/bin/npm',
 1 verbose cli   'install',
-1 verbose cli   'method-override' ]
+1 verbose cli   'connect-flash',
+1 verbose cli   '--save' ]
 2 info using npm@3.10.10
 3 info using node@v6.11.2
 4 silly loadCurrentTree Starting
@@ -24,7 +25,7 @@
 11 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:443:12)
 12 verbose cwd /home/ubuntu/workspace/part1
 13 error Linux 4.9.120-c9
-14 error argv "/home/ubuntu/.nvm/versions/node/v6.11.2/bin/node" "/home/ubuntu/.nvm/versions/node/v6.11.2/bin/npm" "install" "method-override"
+14 error argv "/home/ubuntu/.nvm/versions/node/v6.11.2/bin/node" "/home/ubuntu/.nvm/versions/node/v6.11.2/bin/npm" "install" "connect-flash" "--save"
 15 error node v6.11.2
 16 error npm  v3.10.10
 17 error file /home/ubuntu/workspace/part1/package.json
